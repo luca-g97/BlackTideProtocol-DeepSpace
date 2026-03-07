@@ -1,24 +1,23 @@
-using System;
+using Assets.Tracking_Example.Scripts; // For Marshal.SizeOf
 using Seb.Helpers; // Assuming this namespace contains ComputeHelper and SpatialHash
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using Assets.Tracking_Example.Scripts; // For Marshal.SizeOf
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
-using Random = UnityEngine.Random; // Required for AsyncGPUReadback
 
 namespace Seb.Fluid2D.Simulation
 {
     public class FluidSim2D : MonoBehaviour
     {
         public event Action SimulationStepCompleted;
-        
+
         /// <summary>
         /// Registers a new obstacle in the simulation. int parameter is the new player count.
         public event Action<int> OnObstacleRegistered;
-        
+
         /// <summary>
         /// Unregisters an obstacle from the simulation. int parameter is the new player count.
         public event Action<int> OnObstacleUnregistered;
@@ -163,9 +162,10 @@ namespace Seb.Fluid2D.Simulation
         Dictionary<GameObject, int> playerColors = new Dictionary<GameObject, int>();
         public List<int> mixableColors = new List<int>();
         public List<Color> mixableColorsForShader = new List<Color>();
-        [Range(0, 6)] public int maxPlayerColors = 6;
+        [Range(0, 6)] public int maxPlayerColors = 3;
         public Color colorSymbolizingNoPlayer = Color.white;
         public int lastPlayerCount = -1;
+        public bool colorMixingActivated = false;
 
         [Header("Obstacle Visualization")]
         public Color obstacleLineColor = Color.white;
@@ -395,6 +395,7 @@ namespace Seb.Fluid2D.Simulation
             compute.SetInt("invertMouseGravity", invertMouseGravity ? 1 : 0);
             compute.SetVector("mousePosition", mousePos);
             compute.SetInt("gKeyPressed", Input.GetKey(KeyCode.G) ? 1 : 0);
+            compute.SetInt("colorMixingActivated", colorMixingActivated ? 1 : 0);
             compute.SetInt("numObstacles", _gpuObstacleDataList.Count);
 
             // Send the dynamic list of mixable colors to the shader every frame.
@@ -471,7 +472,13 @@ namespace Seb.Fluid2D.Simulation
             }
 
             if (pauseNextFrame) { isPaused = true; pauseNextFrame = false; }
-            //HandleInput();
+
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                colorMixingActivated = !colorMixingActivated;
+                maxPlayerColors = colorMixingActivated ? 3 : 6;
+                UpdateObstacleAndPlayerState(true);
+            }
         }
 
         void ProcessParticleRemovals()
@@ -760,7 +767,7 @@ namespace Seb.Fluid2D.Simulation
                 // A change occurred, so we need to re-evaluate the obstacle state
                 // and tell the GPU buffers to update on the next frame.
                 UpdateObstacleAndPlayerState();
-                
+
                 OnObstacleUnregistered?.Invoke(lastPlayerCount);
             }
         }
@@ -773,17 +780,19 @@ namespace Seb.Fluid2D.Simulation
                 playerColors.Remove(obstacleGO);
                 // A change occurred, so again, we update the state.
                 UpdateObstacleAndPlayerState();
-                
+
                 OnObstacleUnregistered?.Invoke(lastPlayerCount);
             }
         }
 
-        private void UpdateObstacleAndPlayerState()
+        private void UpdateObstacleAndPlayerState(bool forceUpdate = false)
         {
             if (!Application.isPlaying) return;
 
             // A flag to track if any significant changes require deeper updates.
             bool listActuallyChanged = false;
+
+            if (forceUpdate) { listActuallyChanged = true; }
 
             // --- Cache Management: Ensure all current obstacles are cached ---
             foreach (GameObject go in obstacles)
@@ -915,15 +924,15 @@ namespace Seb.Fluid2D.Simulation
                     }
                     else
                     {
-                        if ((i == 3 && assignedIndices.Contains(0) && assignedIndices.Contains(1) && (maxPlayerColors <= 3 || lastPlayerCount <= 3)) ||
-                            (i == 4 && assignedIndices.Contains(0) && assignedIndices.Contains(2) && (maxPlayerColors <= 3 || lastPlayerCount <= 3)) ||
-                            (i == 5 && assignedIndices.Contains(1) && assignedIndices.Contains(2) && (maxPlayerColors <= 3 || lastPlayerCount <= 3)) ||
-                            (i == 6 && assignedIndices.Contains(0) && assignedIndices.Contains(3)) ||
-                            (i == 7 && assignedIndices.Contains(1) && assignedIndices.Contains(3)) ||
-                            (i == 8 && assignedIndices.Contains(0) && assignedIndices.Contains(4)) ||
-                            (i == 9 && assignedIndices.Contains(2) && assignedIndices.Contains(4)) ||
-                            (i == 10 && assignedIndices.Contains(1) && assignedIndices.Contains(5)) ||
-                            (i == 11 && assignedIndices.Contains(2) && assignedIndices.Contains(5)))
+                        if ((i == 3 && assignedIndices.Contains(0) && assignedIndices.Contains(1) && (maxPlayerColors <= 3 || lastPlayerCount <= 3) && colorMixingActivated) ||
+                            (i == 4 && assignedIndices.Contains(0) && assignedIndices.Contains(2) && (maxPlayerColors <= 3 || lastPlayerCount <= 3) && colorMixingActivated) ||
+                            (i == 5 && assignedIndices.Contains(1) && assignedIndices.Contains(2) && (maxPlayerColors <= 3 || lastPlayerCount <= 3) && colorMixingActivated) ||
+                            (i == 6 && assignedIndices.Contains(0) && assignedIndices.Contains(3) && colorMixingActivated) ||
+                            (i == 7 && assignedIndices.Contains(1) && assignedIndices.Contains(3) && colorMixingActivated) ||
+                            (i == 8 && assignedIndices.Contains(0) && assignedIndices.Contains(4) && colorMixingActivated) ||
+                            (i == 9 && assignedIndices.Contains(2) && assignedIndices.Contains(4) && colorMixingActivated) ||
+                            (i == 10 && assignedIndices.Contains(1) && assignedIndices.Contains(5) && colorMixingActivated) ||
+                            (i == 11 && assignedIndices.Contains(2) && assignedIndices.Contains(5) && colorMixingActivated))
                         {
                             mixableColors.Add(i);
                         }

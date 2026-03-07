@@ -15,7 +15,7 @@ public class XMLSettings : MonoBehaviour
         {
             floorSIM = GameObject.FindFirstObjectByType<FluidSim2D>().GetComponent<FluidSim2D>();
             dynamicCurrents = GameObject.FindFirstObjectByType<DynamicCurrents>().GetComponent<DynamicCurrents>();
-            wallSIM = GameObject.FindFirstObjectByType<FluidSim2D_Wall>().GetComponent<FluidSim2D_Wall>();      
+            wallSIM = GameObject.FindFirstObjectByType<FluidSim2D_Wall>().GetComponent<FluidSim2D_Wall>();
         }
         catch { }
 

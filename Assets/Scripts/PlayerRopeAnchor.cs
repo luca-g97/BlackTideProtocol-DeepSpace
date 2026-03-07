@@ -1,19 +1,17 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class PlayerRopeAnchor : MonoBehaviour
 {
-    private readonly HashSet<PlayerRopeAnchor> _connections = new();
     private PlayerColor _playerColor;
+    private bool ropeInitiated = false;
 
     private void Awake()
     {
         _playerColor = GetComponentInParent<PlayerColor>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (!other.TryGetComponent(out PlayerRopeAnchor otherAnchor))
             return;
@@ -29,33 +27,17 @@ public class PlayerRopeAnchor : MonoBehaviour
         RopeManager.Instance?.Disconnect(this, otherAnchor);
     }
 
-    // Called by RopeManager when a connection is established
-    public void AddConnection(PlayerRopeAnchor other)
-    {
-        if (other == null) return;
-        _connections.Add(other);
-    }
-
-    // Called by RopeManager when a connection is removed
-    public void RemoveConnection(PlayerRopeAnchor other)
-    {
-        if (other == null) return;
-        _connections.Remove(other);
-    }
-
     public Color GetPlayerColor() => _playerColor != null ? _playerColor.currentColor : Color.white;
 
     private void OnDisable()
     {
         // make sure manager cleans up
         RopeManager.Instance?.DisconnectAllFor(this);
-        _connections.Clear();
     }
 
     private void OnDestroy()
     {
         // ensure all connections are cleared when destroyed
         RopeManager.Instance?.DisconnectAllFor(this);
-        _connections.Clear();
     }
 }

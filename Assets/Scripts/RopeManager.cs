@@ -1,9 +1,12 @@
+using Seb.Fluid2D.Simulation;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RopeManager : MonoBehaviour
 {
     public static RopeManager Instance { get; private set; }
+    private FluidSim2D _fluidSim2D;
+    private bool preventRopesUpdate = true;
 
     [Tooltip("Prefab that contains a RopeInstance component and the rope visuals (Rope, RopeMesh, MeshRenderer).")]
     public GameObject ropePrefab;
@@ -19,6 +22,27 @@ public class RopeManager : MonoBehaviour
             return;
         }
         Instance = this;
+
+        _fluidSim2D = GameObject.FindFirstObjectByType<FluidSim2D>();
+    }
+
+    public void Update()
+    {
+        if (!preventRopesUpdate && _fluidSim2D != null && !_fluidSim2D.colorMixingActivated)
+        {
+            preventRopesUpdate = true;
+
+            foreach (ConnectionKey connection in _connections.Keys)
+            {
+                DisconnectAllFor(connection.A, false);
+            }
+
+            _connections.Clear();
+        }
+        else if (preventRopesUpdate && _fluidSim2D != null && _fluidSim2D.colorMixingActivated)
+        {
+            preventRopesUpdate = false;
+        }
     }
 
     public bool AreConnected(PlayerRopeAnchor a, PlayerRopeAnchor b)
@@ -33,11 +57,8 @@ public class RopeManager : MonoBehaviour
     /// </summary>
     public void Connect(PlayerRopeAnchor a, PlayerRopeAnchor b)
     {
-        if (a == null || b == null)
-            return;
-
         // prevent connecting boats with the same player color
-        if (a.GetPlayerColor() == b.GetPlayerColor())
+        if (a == null || b == null || (a.GetPlayerColor() == b.GetPlayerColor()) || preventRopesUpdate)
             return;
 
         if (ropePrefab == null)
@@ -67,12 +88,10 @@ public class RopeManager : MonoBehaviour
         ropeInstance.Initialize(owner, other, color);
 
         _connections.Add(key, ropeInstance);
-        owner.AddConnection(other);
-        other.AddConnection(owner);
     }
 
 
-    public void Disconnect(PlayerRopeAnchor a, PlayerRopeAnchor b)
+    public void Disconnect(PlayerRopeAnchor a, PlayerRopeAnchor b, bool removeEntry = true)
     {
         if (a == null || b == null)
             return;
@@ -81,16 +100,18 @@ public class RopeManager : MonoBehaviour
         if (!_connections.TryGetValue(key, out var ropeInstance))
             return;
 
-        _connections.Remove(key);
+        if (removeEntry)
+        {
+            _connections.Remove(key);
+        }
+
         ropeInstance.DestroyRope();
-        a.RemoveConnection(b);
-        b.RemoveConnection(a);
     }
 
     /// <summary>
     /// Remove all connections for the given anchor (called e.g. on disable).
     /// </summary>
-    public void DisconnectAllFor(PlayerRopeAnchor anchor)
+    public void DisconnectAllFor(PlayerRopeAnchor anchor, bool removeEntry = true)
     {
         if (anchor == null) return;
 
@@ -105,7 +126,7 @@ public class RopeManager : MonoBehaviour
         foreach (var key in toRemove)
         {
             var other = key.A == anchor ? key.B : key.A;
-            Disconnect(anchor, other);
+            Disconnect(anchor, other, removeEntry);
         }
     }
 

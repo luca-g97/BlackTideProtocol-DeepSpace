@@ -21,10 +21,11 @@ public class ColorPalette
         /* 9: Blue-Violet (B+V) */   new Color(0.35f, 0.325f, 0.775f),
         /* 10: Yellow-Green (Y+G) */ new Color(0.625f, 0.875f, 0.175f),
         /* 11: Blue-Green (B+G) */   new Color(0.175f, 0.575f, 0.625f)
+
     };
 
     public static Color actualGreen = new Color(0.25f, 0.75f, 0.25f);
-    
+
     public static List<string> colorNames = new List<string> {
         "Red", "Yellow", "Blue",
         "Orange", "Purple", "Green",

@@ -98,6 +98,7 @@ int numCurrents;
 
 float4 mixableColors[12];
 int mixableColorsSize;
+const int colorMixingActivated;
 
 const uint numParticles;
 const float gravity;
@@ -359,7 +360,7 @@ void HandleCollisions(uint particleIndex)
             {
                 // HIGHLIGHTING LOGIC: Always check if the particle is close enough to a player to be highlighted.
                 // This populates the 'collisionIndices' that the renderer uses.
-                if (consideredObstacles < 4)
+                if ((consideredObstacles < 4 && colorMixingActivated) || consideredObstacles < 1)
                 {
                     if (minDistSq < areaToColorAroundObstaclesSq)
                     {
