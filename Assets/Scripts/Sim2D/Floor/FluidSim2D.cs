@@ -951,8 +951,8 @@ namespace Seb.Fluid2D.Simulation
                     {
                         if (mixableColors[i] == -1)
                         {
-                            mixableColors[i] = assignedIndices[currentIndex];
-                            currentIndex = (currentIndex + 1) % assignedIndices.Count;
+                            mixableColors[i] = assignedIndices.Distinct().ToList()[currentIndex];
+                            currentIndex = (currentIndex + 1) % assignedIndices.Distinct().ToList().Count;
                         }
                         mixableColorsForShader.Add(colorPalette[mixableColors[i]]);
                     }
