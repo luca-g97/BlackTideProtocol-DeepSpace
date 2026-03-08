@@ -768,8 +768,9 @@ namespace Seb.Fluid2D.Simulation
                 // and tell the GPU buffers to update on the next frame.
                 UpdateObstacleAndPlayerState();
 
-                OnObstacleUnregistered?.Invoke(lastPlayerCount);
+                OnObstacleRegistered?.Invoke(lastPlayerCount);
             }
+            //obstacles = obstacles.Distinct().ToList();
         }
 
         public void UnregisterObstacle(GameObject obstacleGO)

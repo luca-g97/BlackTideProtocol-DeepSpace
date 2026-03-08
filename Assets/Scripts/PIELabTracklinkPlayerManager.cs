@@ -170,7 +170,7 @@ namespace Assets.Tracking_Example.Scripts
 
             _playerList.Add(aPlayer);
 
-            fluidSim.obstacles.Add(aPlayer.gameObject);
+            //fluidSim.obstacles.Add(aPlayer.gameObject);
         }
 
         public override void RemovePlayer(int trackID)
@@ -179,7 +179,7 @@ namespace Assets.Tracking_Example.Scripts
             {
                 if (player.TrackID.Equals(trackID))
                 {
-                    fluidSim.obstacles.Remove(player.gameObject);
+                    //fluidSim.obstacles.Remove(player.gameObject);
                     GameObject.Destroy(player.gameObject);
                     _playerList.Remove(player);
                     // return here in case you are really really sure the trackID is in our list only once!
