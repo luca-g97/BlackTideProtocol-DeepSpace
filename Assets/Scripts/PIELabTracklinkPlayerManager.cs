@@ -33,6 +33,9 @@ namespace Assets.Tracking_Example.Scripts
         private float factorX;
         private float factorY;
 
+        private float sceneWidth = 0.1f;
+        private float sceneHeight = 0.1f;
+
         void Start()
         {
             if (GameObject.FindFirstObjectByType<FluidSim2D>())
@@ -115,6 +118,7 @@ namespace Assets.Tracking_Example.Scripts
                 XmlNode updateNode = root.SelectSingleNode("useXML");
                 if (updateNode != null && bool.TryParse(updateNode.InnerText, out bool shouldUpdate) && shouldUpdate)
                 {
+                    /*
                     XmlNode zxNode = root.SelectSingleNode("zeroAbsoluteX");
                     if (zxNode != null && float.TryParse(zxNode.InnerText, out float zx))
                     {
@@ -144,6 +148,17 @@ namespace Assets.Tracking_Example.Scripts
                     if (yNode != null && float.TryParse(yNode.InnerText, out float yO))
                     {
                         yOffset = yO / 100.0f;
+                    }*/
+
+                    XmlNode zxNode = root.SelectSingleNode("sceneWidth");
+                    if (zxNode != null && float.TryParse(zxNode.InnerText, out float zx))
+                    {
+                        sceneWidth = zx / 100.0f;
+                    }
+                    XmlNode zyNode = root.SelectSingleNode("sceneHeight");
+                    if (zyNode != null && float.TryParse(zyNode.InnerText, out float zy))
+                    {
+                        sceneHeight = zy / 100.0f;
                     }
                 }
             }
@@ -206,10 +221,15 @@ namespace Assets.Tracking_Example.Scripts
                     //aPlayer.SetPosition(VectorAdapter.ToUnityVector2(TrackingAdapter.GetScreenPositionFromRelativePosition(trackRecord.relPos.x, trackRecord.relPos.y)));
 
                     Vector2 newPlayerPos = new Vector2();
+                    /*
                     float percentX = Mathf.InverseLerp(zeroAbsoluteX, fullAbsoluteX, trackRecord.currentPos.x);
                     float percentY = Mathf.InverseLerp(zeroAbsoluteY, fullAbsoluteY, trackRecord.currentPos.y);
                     newPlayerPos.x = factorX + percentX * (simulationBounds.x - xOffset);
                     newPlayerPos.y = factorY + percentY * (simulationBounds.y - yOffset);
+                    */
+                    newPlayerPos.x = -(sceneWidth / 2.0f) + (sceneWidth * trackRecord.relPos.x);
+                    newPlayerPos.y = -(sceneHeight / 2.0f) + (sceneHeight * (1.0f - trackRecord.relPos.y));
+
                     aPlayer.SetPosition(newPlayerPos);
 
                     return;
