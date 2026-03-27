@@ -21,6 +21,8 @@ namespace Seb.Fluid2D.Simulation
         /// <summary>
         /// Unregisters an obstacle from the simulation. int parameter is the new player count.
         public event Action<int> OnObstacleUnregistered;
+        
+        public event Action<bool> OnColorMixingModeChanged;
 
         [Header("Simulation Settings")]
         public float timeScale = 1;
@@ -478,6 +480,8 @@ namespace Seb.Fluid2D.Simulation
                 colorMixingActivated = !colorMixingActivated;
                 maxPlayerColors = colorMixingActivated ? 3 : 6;
                 UpdateObstacleAndPlayerState(true);
+                
+                OnColorMixingModeChanged?.Invoke(colorMixingActivated);
             }
         }
 

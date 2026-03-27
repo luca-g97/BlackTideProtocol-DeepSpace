@@ -34,8 +34,8 @@ public class TitleScreen : MonoBehaviour
 
     private Sequence _ctaLoopSequence;
     private Sequence _titleShowSequence;
-    private Tween _ctaShowTween;
     private Sequence _ctaShineLoopSequence;
+    private Tween _ctaShowTween;
 
     private bool _isTitleVisible;
     private FluidSim2D _fluidSim;

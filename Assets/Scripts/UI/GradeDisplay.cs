@@ -36,12 +36,13 @@ public class GradeDisplay : ValidatedMonoBehaviour
     {
         _currentGradeSetupSequence?.Kill();
         _currentGradeRevealSequence?.Kill();
+        _shineLoopSequence?.Kill();
     }
 
     public Sequence GradeSetupSequence()
     {
         _shineTransform.sizeDelta = new Vector2(0f, _shineTransform.sizeDelta.y);
-        
+
         _currentGradeSetupSequence?.Kill();
 
         _currentGradeSetupSequence = DOTween.Sequence();
@@ -63,15 +64,16 @@ public class GradeDisplay : ValidatedMonoBehaviour
         _currentGradeRevealSequence.AppendCallback(_descriptionWriteText.Write);
         for (int i = 0; i < numberOfStars; i++)
         {
-            _currentGradeRevealSequence.Insert(0.5f * i, _gradeStars[i].StarRevealSequence(_starRevealSounds[i], 1 + i * _starRevealPitchStep));
+            _currentGradeRevealSequence.Insert(0.5f * i,
+                _gradeStars[i].StarRevealSequence(_starRevealSounds[i], 1 + i * _starRevealPitchStep));
         }
-        
+
         _currentGradeRevealSequence.Join(_shineTransform
             .DOSizeDelta(new Vector2(_shineDefaultWidth, _shineTransform.sizeDelta.y), 0.5f)
             .SetEase(Ease.OutBack));
-        
+
         _currentGradeRevealSequence.OnComplete(StartShineLoop);
-        
+
         return _currentGradeRevealSequence;
     }
 
@@ -108,7 +110,7 @@ public class GradeDisplay : ValidatedMonoBehaviour
         _shineLoopSequence = DOTween.Sequence()
             .Append(_shineImage.DOFade(1f, 0.5f).SetEase(Ease.InOutSine))
             .Append(_shineImage.DOFade(0f, 0.5f).SetEase(Ease.InOutSine));
-        
+
         _shineLoopSequence.SetLoops(-1, LoopType.Restart);
     }
 }
