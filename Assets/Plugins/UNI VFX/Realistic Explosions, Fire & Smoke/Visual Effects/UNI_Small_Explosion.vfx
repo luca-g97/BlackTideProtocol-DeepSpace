@@ -16,7 +16,7 @@ MonoBehaviour:
   stickyNoteInfos: []
   categories:
   - name: MainVFX
-    collapsed: 0
+    collapsed: 1
   - name: Components
     collapsed: 0
   uiBounds:
@@ -98,22 +98,6 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: PrimaryColorGradient
-    path: PrimaryColorGradient
-    tooltip: 
-    space: -1
-    spaceable: 0
-    sheetType: m_Gradient
-    realType: Gradient
-    defaultValue:
-      m_Type:
-        m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"colorKeys":[{"color":{"r":15.813398361206055,"g":6.649537563323975,"b":0.0,"a":1.0},"time":0.0},{"color":{"r":0.7450980544090271,"g":0.0,"b":0.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}],"gradientMode":0}'
-    min: -Infinity
-    max: Infinity
-    enumValues: []
-    descendantCount: 0
   - name: Bounds
     path: 
     tooltip: 
@@ -157,6 +141,22 @@ MonoBehaviour:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
       m_SerializableObject: '{"x":4.0,"y":4.0,"z":4.0}'
+    min: -Infinity
+    max: Infinity
+    enumValues: []
+    descendantCount: 0
+  - name: PrimaryColorGradient
+    path: PrimaryColorGradient
+    tooltip: 
+    space: -1
+    spaceable: 0
+    sheetType: m_Gradient
+    realType: Gradient
+    defaultValue:
+      m_Type:
+        m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":15.813398361206055,"g":6.649537563323975,"b":0.0,"a":1.0},"time":0.0},{"color":{"r":0.7450980544090271,"g":0.0,"b":0.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}],"gradientMode":0}'
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -225,7 +225,7 @@ MonoBehaviour:
     enumValues: []
     descendantCount: 0
   m_ImportDependencies: []
-  m_GraphVersion: 18
+  m_GraphVersion: 19
   m_ResourceVersion: 1
   m_SubgraphDependencies: []
   m_CategoryPath: 
@@ -241,10 +241,6 @@ VisualEffectResource:
     m_RendererSettings:
       motionVectorGenerationMode: 0
       shadowCastingMode: 0
-      rayTracingMode: 0
-      receiveShadows: 0
-      reflectionProbeUsage: 0
-      lightProbeUsage: 0
     m_CullingFlags: 3
     m_UpdateMode: 0
     m_PreWarmDeltaTime: 0.05
@@ -834,6 +830,7 @@ MonoBehaviour:
   m_SubOutputs:
   - {fileID: 8926484042661614590}
   - {fileID: 8926484042661616764}
+  useBaseColorMap: 3
   colorMapping: 0
   uvMode: 1
   flipbookLayout: 0
@@ -1142,7 +1139,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614613}
   m_ExposedName: Bounds
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 0
   m_Category: MainVFX
   m_Min:
     m_Type:
@@ -2275,7 +2272,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615421}
   m_ExposedName: PrimaryColorGradient
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 1
   m_Category: MainVFX
   m_Min:
     m_Type:
@@ -4336,6 +4333,7 @@ MonoBehaviour:
   sortingPriority: 0
   m_SubOutputs:
   - {fileID: 8926484042661616765}
+  useBaseColorMap: 3
   colorMapping: 0
   uvMode: 1
   flipbookLayout: 0
@@ -5486,6 +5484,7 @@ MonoBehaviour:
   sortingPriority: 0
   m_SubOutputs:
   - {fileID: 8926484042661616766}
+  useBaseColorMap: 3
   colorMapping: 0
   uvMode: 0
   flipbookLayout: 0
@@ -7094,6 +7093,7 @@ MonoBehaviour:
   sortingPriority: 0
   m_SubOutputs:
   - {fileID: 8926484042661616767}
+  useBaseColorMap: 3
   colorMapping: 0
   uvMode: 1
   flipbookLayout: 0
@@ -8090,7 +8090,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616210}
   m_ExposedName: LingeringSmokeLifetimeMinMax
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 2
   m_Category: Components
   m_Min:
     m_Type:
@@ -8243,7 +8243,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616220}
   m_ExposedName: EmberSpawnCount
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 3
   m_Category: Components
   m_Min:
     m_Type:
@@ -8326,7 +8326,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616224}
   m_ExposedName: EmberColorOverLife
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 4
   m_Category: Components
   m_Min:
     m_Type:
@@ -9018,6 +9018,7 @@ MonoBehaviour:
   sortingPriority: 0
   m_SubOutputs:
   - {fileID: 8926484042661616768}
+  useBaseColorMap: 3
   colorMapping: 0
   uvMode: 1
   flipbookLayout: 0

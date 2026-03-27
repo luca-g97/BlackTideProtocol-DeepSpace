@@ -77,6 +77,53 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
+  - name: Bounds
+    path: 
+    tooltip: 
+    space: 0
+    spaceable: 1
+    sheetType: 
+    realType: AABox
+    defaultValue:
+      m_Type:
+        m_SerializableType: 
+      m_SerializableObject: 
+    min: -Infinity
+    max: Infinity
+    enumValues: []
+    descendantCount: 2
+  - name: center
+    path: Bounds_center
+    tooltip: Sets the center of the box.
+    space: -1
+    spaceable: 0
+    sheetType: m_Vector3f
+    realType: Vector3
+    defaultValue:
+      m_Type:
+        m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_SerializableObject: '{"x":0.0,"y":1.0,"z":0.0}'
+    min: -Infinity
+    max: Infinity
+    enumValues: []
+    descendantCount: 0
+  - name: size
+    path: Bounds_size
+    tooltip: Sets the size of the box along each axis.
+    space: -1
+    spaceable: 0
+    sheetType: m_Vector3f
+    realType: Vector3
+    defaultValue:
+      m_Type:
+        m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_SerializableObject: '{"x":6.0,"y":4.0,"z":6.0}'
+    min: -Infinity
+    max: Infinity
+    enumValues: []
+    descendantCount: 0
   - name: PrimaryColorGradient
     path: PrimaryColorGradient
     tooltip: 
@@ -140,53 +187,6 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: Bounds
-    path: 
-    tooltip: 
-    space: 0
-    spaceable: 1
-    sheetType: 
-    realType: AABox
-    defaultValue:
-      m_Type:
-        m_SerializableType: 
-      m_SerializableObject: 
-    min: -Infinity
-    max: Infinity
-    enumValues: []
-    descendantCount: 2
-  - name: center
-    path: Bounds_center
-    tooltip: Sets the center of the box.
-    space: -1
-    spaceable: 0
-    sheetType: m_Vector3f
-    realType: Vector3
-    defaultValue:
-      m_Type:
-        m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":0.0,"y":1.0,"z":0.0}'
-    min: -Infinity
-    max: Infinity
-    enumValues: []
-    descendantCount: 0
-  - name: size
-    path: Bounds_size
-    tooltip: Sets the size of the box along each axis.
-    space: -1
-    spaceable: 0
-    sheetType: m_Vector3f
-    realType: Vector3
-    defaultValue:
-      m_Type:
-        m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":6.0,"y":4.0,"z":6.0}'
-    min: -Infinity
-    max: Infinity
-    enumValues: []
-    descendantCount: 0
   - name: Components
     path: 
     tooltip: 
@@ -219,7 +219,7 @@ MonoBehaviour:
     enumValues: []
     descendantCount: 0
   m_ImportDependencies: []
-  m_GraphVersion: 18
+  m_GraphVersion: 19
   m_ResourceVersion: 1
   m_SubgraphDependencies: []
   m_CategoryPath: 
@@ -235,10 +235,6 @@ VisualEffectResource:
     m_RendererSettings:
       motionVectorGenerationMode: 0
       shadowCastingMode: 0
-      rayTracingMode: 0
-      receiveShadows: 0
-      reflectionProbeUsage: 0
-      lightProbeUsage: 0
     m_CullingFlags: 3
     m_UpdateMode: 0
     m_PreWarmDeltaTime: 0.05
@@ -1261,6 +1257,7 @@ MonoBehaviour:
   m_SubOutputs:
   - {fileID: 8926484042661614590}
   - {fileID: 8926484042661615031}
+  useBaseColorMap: 3
   colorMapping: 0
   uvMode: 1
   flipbookLayout: 0
@@ -1677,7 +1674,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614607}
   m_ExposedName: Bounds
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 0
   m_Category: MainVFX
   m_Min:
     m_Type:
@@ -2041,7 +2038,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614620}
   m_ExposedName: PrimaryColorGradient
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 1
   m_Category: MainVFX
   m_Min:
     m_Type:
@@ -4551,6 +4548,7 @@ MonoBehaviour:
   sortingPriority: 0
   m_SubOutputs:
   - {fileID: 8926484042661615032}
+  useBaseColorMap: 3
   colorMapping: 0
   uvMode: 1
   flipbookLayout: 0
@@ -5707,7 +5705,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615025}
   m_ExposedName: AlphaMinMax
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 3
   m_Category: Components
   m_Min:
     m_Type:

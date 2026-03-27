@@ -13,6 +13,18 @@ public class PlayerGhost : MonoBehaviour
 
     private int _numberOfCollisions;
 
+    private bool _isShuttingDown;
+
+    private void OnApplicationQuit()
+    {
+        _isShuttingDown = true;
+    }
+
+    private void OnDisable()
+    {
+        if (!gameObject.scene.isLoaded) _isShuttingDown = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Ventil") || other.CompareTag("Obstacle"))
@@ -25,6 +37,7 @@ public class PlayerGhost : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (_isShuttingDown) return;
         if (!gameObject.activeInHierarchy) return;
 
         if (other.CompareTag("Ventil") || other.CompareTag("Obstacle"))
@@ -53,6 +66,8 @@ public class PlayerGhost : MonoBehaviour
 
     private void HideGhostSequence()
     {
+        if (!_normalModel || !_ghostModel || !_canvas) return;
+
         _normalModel.SetActive(true);
         _ghostModel.SetActive(false);
         _canvas.enabled = true;
