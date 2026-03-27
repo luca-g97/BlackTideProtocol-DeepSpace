@@ -1,6 +1,5 @@
 using System;
-using System.Buffers;
-using DG.Tweening;
+using PrimeTween;
 using KBCore.Refs;
 using TMPro;
 using UnityEngine;
@@ -34,16 +33,16 @@ public class GradeDisplay : ValidatedMonoBehaviour
 
     private void OnDestroy()
     {
-        _currentGradeSetupSequence?.Kill();
-        _currentGradeRevealSequence?.Kill();
-        _shineLoopSequence?.Kill();
+        _currentGradeSetupSequence.Kill();
+        _currentGradeRevealSequence.Kill();
+        _shineLoopSequence.Kill();
     }
 
     public Sequence GradeSetupSequence()
     {
         _shineTransform.sizeDelta = new Vector2(0f, _shineTransform.sizeDelta.y);
 
-        _currentGradeSetupSequence?.Kill();
+        _currentGradeSetupSequence.Kill();
 
         _currentGradeSetupSequence = DOTween.Sequence();
 
@@ -58,7 +57,7 @@ public class GradeDisplay : ValidatedMonoBehaviour
 
     public Sequence GradeRevealSequence(int numberOfStars)
     {
-        _currentGradeRevealSequence?.Kill();
+        _currentGradeRevealSequence.Kill();
         _currentGradeRevealSequence = DOTween.Sequence();
 
         _currentGradeRevealSequence.AppendCallback(_descriptionWriteText.Write);
@@ -105,7 +104,7 @@ public class GradeDisplay : ValidatedMonoBehaviour
 
     private void StartShineLoop()
     {
-        _shineLoopSequence?.Kill();
+        _shineLoopSequence.Kill();
 
         _shineLoopSequence = DOTween.Sequence()
             .Append(_shineImage.DOFade(1f, 0.5f).SetEase(Ease.InOutSine))

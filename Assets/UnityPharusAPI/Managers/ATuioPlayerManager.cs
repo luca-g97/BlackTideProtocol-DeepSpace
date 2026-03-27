@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityPharusAPI;
-using UnityPharusAPI.TransmissionFrameworks.Tracklink;
 using UnityPharusAPI.TransmissionFrameworks.Tuio;
 using UnityPharusAPI.TransmissionFrameworks.Tuio.TUIO;
 

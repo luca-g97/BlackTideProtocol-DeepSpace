@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
-using DG.Tweening;
-using KBCore.Refs;
+using PrimeTween;
 using TMPro;
 using UnityEngine;
 
@@ -34,7 +31,7 @@ public class StatLine : MonoBehaviour
 
     private void OnDestroy()
     {
-        _currentRevealSequence?.Kill();
+        _currentRevealSequence.Kill();
     }
 
     private void Start()
@@ -50,7 +47,7 @@ public class StatLine : MonoBehaviour
         _valueCanvasGroup.alpha = 0f;
         _valueTransform.localScale = Vector3.one * _valueRevealStartScale;
         
-        _currentRevealSequence?.Kill();
+        _currentRevealSequence.Kill();
 
         return _currentRevealSequence = DOTween.Sequence()
             .AppendCallback(delegate

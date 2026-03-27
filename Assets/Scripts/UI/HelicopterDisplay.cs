@@ -1,6 +1,5 @@
 using System;
-using System.Linq;
-using DG.Tweening;
+using PrimeTween;
 using KBCore.Refs;
 using Seb.Fluid2D.Simulation;
 using TMPro;
@@ -73,8 +72,8 @@ public class HelicopterDisplay : ValidatedMonoBehaviour
 
     private void OnDestroy()
     {
-        _currentTimerSequence?.Kill();
-        _currentColorModeSequence?.Kill();
+        _currentTimerSequence.Kill();
+        _currentColorModeSequence.Kill();
     }
 
     private void OnMissionGradedHandler(int _)
@@ -89,9 +88,10 @@ public class HelicopterDisplay : ValidatedMonoBehaviour
 
     private void OnSecondPassedHandler(int _)
     {
-        _currentTimerSequence?.Kill();
+        _missionClockText.alpha = 1f;
+        
+        _currentTimerSequence.Kill();
         _currentTimerSequence = DOTween.Sequence()
-            .Append(_missionClockText.DOFade(1, 0f))
             .Append(_missionClockText.DOFade(0.5f, 1f));
 
         if (_missionTracker.missionIsGraded)
@@ -125,7 +125,7 @@ public class HelicopterDisplay : ValidatedMonoBehaviour
     {
         _updateTimeDisplay = false;
 
-        _currentTimerSequence?.Kill();
+        _currentTimerSequence.Kill();
 
         BlinkOutSequence(_missionClockText).OnComplete(delegate
         {
@@ -192,7 +192,7 @@ public class HelicopterDisplay : ValidatedMonoBehaviour
 
     private void DisplayColorModeSwitch(bool mixingIsOn)
     {
-        _currentColorModeSequence?.Kill();
+        _currentColorModeSequence.Kill();
         
         UpdateColorModeIcons(mixingIsOn);
         UpdateColorModeText(mixingIsOn);

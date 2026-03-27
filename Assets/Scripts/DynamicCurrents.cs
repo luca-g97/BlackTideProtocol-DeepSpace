@@ -1,5 +1,3 @@
-using System;
-using NUnit.Framework;
 using Seb.Fluid2D.Simulation;
 using System.Collections;
 using System.Collections.Generic;

@@ -1,7 +1,5 @@
-using System;
-using DG.Tweening;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using PrimeTween;
 using UnityEngine;
 using UnityEngine.VFX;
 using Random = UnityEngine.Random;
@@ -87,7 +85,7 @@ namespace Seb.Fluid2D.Simulation
 
         private void OnDestroy()
         {
-            _currentSpawnSequence?.Kill();
+            _currentSpawnSequence.Kill();
         }
 
         private void AssignSpawnRegionByParticleTyp(ParticleType type)
@@ -115,10 +113,9 @@ namespace Seb.Fluid2D.Simulation
             // If we should be spawning but we aren't, start the process
             if (shouldBeSpawning && allowSpawning)
             {
-                if (_currentSpawnSequence == null || !_currentSpawnSequence.IsActive() ||
-                    !_currentSpawnSequence.IsPlaying())
+                if (!_currentSpawnSequence.isAlive)
                 {
-                    _currentSpawnSequence?.Kill();
+                    _currentSpawnSequence.Kill();
                     _currentSpawnSequence = SpawnSequence();
                     _isSpawning = true;
                 }
@@ -205,8 +202,7 @@ namespace Seb.Fluid2D.Simulation
         public void StopSpawning()
         {
             _isSpawning = false;
-            _currentSpawnSequence?.Kill();
-            _currentSpawnSequence = null;
+            _currentSpawnSequence.Kill();
             _currentSpawnRegion.particlesPerSecond = 0f;
             _fireAudioSource.Stop();
             _fireEffect.Stop();

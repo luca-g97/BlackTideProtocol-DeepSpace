@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI; // Or TMPro if you use TextMeshPro
+// Or TMPro if you use TextMeshPro
 using System.IO;
 using System.Collections.Generic;
 using KBCore.Refs;

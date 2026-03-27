@@ -1,5 +1,4 @@
-using System;
-using DG.Tweening;
+using PrimeTween;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -52,16 +51,14 @@ public class Current : MonoBehaviour
 
     private void OnDestroy()
     {
-        _currentSequence?.Kill();
+        _currentSequence.Kill();
     }
 
     private void Update()
     {
-        if (_currentSequence == null || !_currentSequence.IsActive() || !_currentSequence.IsPlaying())
-        {
-            _currentSequence?.Kill();
-            _currentSequence = CurrentSequence();
-        }
+        if (_currentSequence.isAlive) return;
+        _currentSequence.Kill();
+        _currentSequence = CurrentSequence();
     }
 
     void InitializeLineRenderer()

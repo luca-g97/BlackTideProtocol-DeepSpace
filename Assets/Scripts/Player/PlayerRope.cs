@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using DG.Tweening;
+using PrimeTween;
 using GogoGaga.OptimizedRopesAndCables;
 using KBCore.Refs;
 using UnityEngine;
@@ -29,6 +28,11 @@ public class PlayerRope : ValidatedMonoBehaviour
     {
         _ropeColorBlock = new MaterialPropertyBlock();
         DisableRope();
+    }
+    
+    private void OnDestroy()
+    {
+        _currentRopeSequence.Kill();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -110,14 +114,14 @@ public class PlayerRope : ValidatedMonoBehaviour
 
         _rope.EndPoint.SetParent(endPoint, true);
 
-        _currentRopeSequence?.Kill();
+        _currentRopeSequence.Kill();
         _currentRopeSequence = ShootRopeSequence();
     }
 
     private void DisableRope()
     {
         _rope.EndPoint.SetParent(transform, true);
-        _currentRopeSequence?.Kill();
+        _currentRopeSequence.Kill();
         _currentRopeSequence = ShootRopeSequence().OnComplete(() =>
         {
             _rope.enabled = false;
@@ -128,7 +132,7 @@ public class PlayerRope : ValidatedMonoBehaviour
 
     private Sequence ShootRopeSequence()
     {
-        _currentRopeSequence?.Kill();
+        _currentRopeSequence.Kill();
         return DOTween.Sequence()
             .Append(_rope.EndPoint.DOLocalMove(Vector3.zero, 0.25f).SetEase(Ease.InCubic));
     }

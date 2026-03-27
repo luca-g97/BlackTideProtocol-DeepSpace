@@ -21,6 +21,13 @@
       "dependencies": {},
       "hash": "8d3a0ee421588faaf373e0fe4b8f4577a522f029"
     },
+    "com.kyrylokuzyk.primetween": {
+      "version": "1.3.8",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.org"
+    },
     "com.unify.unified-universal-blur": {
       "version": "https://github.com/lukakldiashvili/Unified-Universal-Blur.git",
       "depth": 0,

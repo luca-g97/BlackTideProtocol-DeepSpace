@@ -2,14 +2,11 @@
 using Assets.UnityPharusAPI.Managers;
 using Assets.UnityPharusAPI.Player;
 using Seb.Fluid2D.Simulation;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using TMPro;
 using UnityEngine;
 using UnityPharusAPI;
-using UnityPharusAPI.Services;
 using UnityPharusAPI.TransmissionFrameworks.Tracklink;
 
 namespace Assets.Tracking_Example.Scripts

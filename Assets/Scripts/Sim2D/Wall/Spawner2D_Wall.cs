@@ -1,10 +1,7 @@
 using Seb.Fluid2D.Simulation;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 public class Spawner2D_Wall : MonoBehaviour
 {

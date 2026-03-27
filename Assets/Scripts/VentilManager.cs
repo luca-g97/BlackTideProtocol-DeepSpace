@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using KBCore.Refs;
 using Seb.Fluid2D.Simulation;
 using System.Collections.Generic;
 using System.Linq;

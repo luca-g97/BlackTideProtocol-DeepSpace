@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using System.Collections.Generic;
-using System;
 
 // This class contains some helper functions to make life a little easier working with compute shaders
 // (Very work-in-progress!)

@@ -1,6 +1,5 @@
-using System;
-using DG.Tweening;
 using KBCore.Refs;
+using PrimeTween;
 using UnityEngine;
 
 public class AnimatedPanel : ValidatedMonoBehaviour
@@ -33,13 +32,13 @@ public class AnimatedPanel : ValidatedMonoBehaviour
 
     private void OnDestroy()
     {
-        _currentAnimationSequence?.Kill();
+        _currentAnimationSequence.Kill();
     }
 
     public Sequence AnimateInSequence()
     {
         SetOut();
-        _currentAnimationSequence?.Kill();
+        _currentAnimationSequence.Kill();
 
         return _currentAnimationSequence = DOTween.Sequence()
             .Append(_rectTransform.DOSizeDelta(_defaultSizeDelta, _animationDuration).SetEase(_animateInEase));
@@ -47,14 +46,14 @@ public class AnimatedPanel : ValidatedMonoBehaviour
 
     private void SetIn()
     {
-        _currentAnimationSequence?.Kill();
+        _currentAnimationSequence.Kill();
 
         _rectTransform.sizeDelta = _defaultSizeDelta;
     }
 
     public Sequence AnimateOutSequence()
     {
-        _currentAnimationSequence?.Kill();
+        _currentAnimationSequence.Kill();
 
         return _currentAnimationSequence = DOTween.Sequence()
             .Append(_rectTransform
@@ -66,7 +65,7 @@ public class AnimatedPanel : ValidatedMonoBehaviour
     
     private void SetOut()
     {
-        _currentAnimationSequence?.Kill();
+        _currentAnimationSequence.Kill();
 
         _rectTransform.sizeDelta = new Vector2(_animateWidth ? 0 : _defaultSizeDelta.x, _animateHeight ? 0 : _defaultSizeDelta.y);
     }

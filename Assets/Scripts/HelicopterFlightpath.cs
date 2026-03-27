@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
-using DG.Tweening;
-using Unity.Collections.LowLevel.Unsafe;
+using PrimeTween;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -51,7 +49,7 @@ public class HelicopterFlightpath : MonoBehaviour
 
     private void OnMissionGradedHandler(int _)
     {
-        _currentFlightSequence?.Kill(); // Stop any ongoing flight sequence
+        _currentFlightSequence.Kill(); // Stop any ongoing flight sequence
 
         // left or right when mission is graded
 
@@ -80,7 +78,7 @@ public class HelicopterFlightpath : MonoBehaviour
 
     private void OnMissionOverHandler()
     {
-        _currentFlightSequence?.Kill(); // Stop any ongoing flight sequence
+        _currentFlightSequence.Kill(); // Stop any ongoing flight sequence
 
         // left or right when mission is over
 
@@ -119,16 +117,16 @@ public class HelicopterFlightpath : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(directionToNext, Vector3.up);
 
         return DOTween.Sequence()
-            .Append(_rigidbody.DORotate(targetRotation.eulerAngles, _turnDuration).SetEase(ease))
+            .Append(_rigidbody.DORotate(targetRotation, _turnDuration).SetEase(ease))
             .Join(_rigidbody.DOMove(target.position, _flightDuration * flightDurationMultiplier).SetEase(ease))
             .Insert(_flightDuration * 0.5f * flightDurationMultiplier, _rigidbody
-                .DORotate(target.rotation.eulerAngles, _turnDuration)
+                .DORotate(target.rotation, _turnDuration)
                 .SetEase(Ease.InOutCubic));
     }
 
     private void FlyToRandomWaypoint()
     {
-        _currentFlightSequence?.Kill(); // Kill any existing sequence before starting a new one
+        _currentFlightSequence.Kill(); // Kill any existing sequence before starting a new one
 
         int nextWaypointIndex = GetNextOrPreviousWaypointIndex(_currentWaypointIndex);
         Transform nextWaypoint = _waypoints[nextWaypointIndex];
@@ -139,6 +137,6 @@ public class HelicopterFlightpath : MonoBehaviour
 
     private void OnDestroy()
     {
-        _currentFlightSequence?.Kill(); // Clean up the sequence if the object is destroyed
+        _currentFlightSequence.Kill(); // Clean up the sequence if the object is destroyed
     }
 }

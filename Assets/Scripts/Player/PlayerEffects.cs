@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
-using DG.Tweening;
-using DG.Tweening.Plugins;
+using PrimeTween;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.VFX;
@@ -26,12 +24,12 @@ public class PlayerEffects : MonoBehaviour
 
     private void CollectSequence()
     {
-        if (_currentCollectSequence != null && _currentCollectSequence.IsActive())
+        if (_currentCollectSequence.isAlive)
         {
             return;
         }
 
-        _currentCollectSequence?.Kill();
+        _currentCollectSequence.Kill();
         _currentCollectSequence = DOTween.Sequence()
             .Append(_modelTransform.DOScale(_defaultModelScale * 1.25f, 0.1f).SetEase(Ease.OutCubic))
             .Join(_lightCircleImage.DOFade(_defaultLightCircleAlpha * 2, 0.1f).SetEase(Ease.OutCubic))
@@ -57,6 +55,6 @@ public class PlayerEffects : MonoBehaviour
 
     private void OnDestroy()
     {
-        _currentCollectSequence?.Kill();
+        _currentCollectSequence.Kill();
     }
 }

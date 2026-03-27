@@ -1,14 +1,11 @@
 using System;
 using System.Collections;
-using DG.Tweening;
 using KBCore.Refs;
-using System.Collections.Generic;
-using System.IO.IsolatedStorage;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.VFX;
-using UnityUtils;
 using Random = UnityEngine.Random;
+using PrimeTween;
 
 public class Ventil : ValidatedMonoBehaviour
 {
@@ -74,7 +71,7 @@ public class Ventil : ValidatedMonoBehaviour
 
         if (_currentHealthPoints <= 0)
         {
-            _currentDamageSequence?.Kill();
+            _currentDamageSequence.Kill();
             _audioSource.PlayOneShot(_destroyedSound, 2f);
             _audioSource.PlayOneShot(_impactSound, 0.5f);
             DestroyedSequence();
@@ -143,7 +140,7 @@ public class Ventil : ValidatedMonoBehaviour
         _deathIconCanvasGroup.alpha = 0f;
         _deathIconRectTransform.localScale = Vector3.one * 3f;
 
-        _currentSpawnSequence?.Kill();
+        _currentSpawnSequence.Kill();
         _currentSpawnSequence = DOTween.Sequence()
             .Append(_modelTransform.DOScale(0, 0.5f).SetEase(Ease.InBack))
             .Join(_deathIconCanvasGroup.DOFade(1f, 0.5f).SetEase(Ease.OutCubic))
@@ -171,7 +168,7 @@ public class Ventil : ValidatedMonoBehaviour
         _shieldIconRectTransform.localScale = Vector3.one * 3f;
         _shieldIconRectTransform.localPosition = Vector3.zero;
         
-        _currentSpawnSequence?.Kill();
+        _currentSpawnSequence.Kill();
         _currentSpawnSequence = DOTween.Sequence()
             .Append(_modelTransform.DOScale(_defaultModelScale, 0.5f).SetEase(Ease.OutBack))
             .Join(_shieldIconCanvasGroup.DOFade(1f, 0.5f).SetEase(Ease.OutCubic))
@@ -184,12 +181,12 @@ public class Ventil : ValidatedMonoBehaviour
 
     private void DamageSequence()
     {
-        if (_currentDamageSequence != null && _currentDamageSequence.IsActive())
+        if (_currentDamageSequence.isAlive)
         {
             return;
         }
 
-        _currentDamageSequence?.Kill();
+        _currentDamageSequence.Kill();
         _currentDamageSequence = DOTween.Sequence()
             .Append(_modelTransform.DOScale(_defaultModelScale * 0.95f, 0.1f).SetEase(Ease.OutCubic))
             .Append(_modelTransform.DOScale(_defaultModelScale, 0.1f).SetEase(Ease.OutCubic));
@@ -197,8 +194,9 @@ public class Ventil : ValidatedMonoBehaviour
 
     private void OnDestroy()
     {
-        _currentSpawnSequence?.Kill();
-        _currentColorSequence?.Kill();
+        _currentSpawnSequence.Kill();
+        _currentColorSequence.Kill();
+        _currentDamageSequence.Kill();
     }
 
     private IEnumerator InvulnerabilityCoroutine()

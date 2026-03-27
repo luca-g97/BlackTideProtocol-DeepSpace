@@ -1,8 +1,6 @@
-using System;
-using DG.Tweening;
 using KBCore.Refs;
+using PrimeTween;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class ReviewUI : ValidatedMonoBehaviour
 {
@@ -82,12 +80,12 @@ public class ReviewUI : ValidatedMonoBehaviour
 
     private void OnDestroy()
     {
-        _currentRevealSequence?.Kill();
+        _currentRevealSequence.Kill();
     }
 
     private void RevealSequence(int numberOfStars)
     {
-        _currentRevealSequence?.Kill();
+        _currentRevealSequence.Kill();
         _currentRevealSequence = DOTween.Sequence()
             .Append(_panels[0].AnimateInSequence())
             .Join(_gradeDisplay.GradeSetupSequence())

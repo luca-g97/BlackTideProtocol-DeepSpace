@@ -1,7 +1,6 @@
-using System;
-using DG.Tweening;
 using GogoGaga.OptimizedRopesAndCables; // keep if you use that rope package
 using UnityEngine;
+using PrimeTween;
 
 public class RopeInstance : MonoBehaviour
 {
@@ -54,7 +53,7 @@ public class RopeInstance : MonoBehaviour
         if (_ropeMesh) _ropeMesh.enabled = true;
         if (_ropeMeshRenderer) _ropeMeshRenderer.enabled = true;
 
-        _currentRopeSequence?.Kill();
+        _currentRopeSequence.Kill();
         if (_rope)
         {
             _currentRopeSequence = DOTween.Sequence()
@@ -70,7 +69,7 @@ public class RopeInstance : MonoBehaviour
     {
         if (_rope)
         {
-            _currentRopeSequence?.Kill();
+            _currentRopeSequence.Kill();
 
             // Animate back to origin (world-space) then destroy
             if (_rope.EndPoint)
@@ -92,6 +91,6 @@ public class RopeInstance : MonoBehaviour
 
     private void OnDestroy()
     {
-        _currentRopeSequence?.Kill();
+        _currentRopeSequence.Kill();
     }
 }

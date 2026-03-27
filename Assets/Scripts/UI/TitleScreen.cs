@@ -1,12 +1,7 @@
-using System;
-using Assets.Tracking_Example.Scripts;
-using Assets.UnityPharusAPI.Managers;
-using DG.Tweening;
+using PrimeTween;
 using Seb.Fluid2D.Simulation;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityPharusAPI.TransmissionFrameworks.Tracklink;
 
 public class TitleScreen : MonoBehaviour
 {
@@ -65,24 +60,20 @@ public class TitleScreen : MonoBehaviour
             _fluidSim.OnObstacleRegistered -= OnObstacleChangedHandler;
             _fluidSim.OnObstacleUnregistered -= OnObstacleChangedHandler;
         }
-
-        StopCtaLoop();
-        HideTitle();
-        _isTitleVisible = false;
     }
 
     private void OnDestroy()
     {
-        _ctaLoopSequence?.Kill();
-        _ctaShineLoopSequence?.Kill();
-        _titleShowSequence?.Kill();
-        _ctaShowTween?.Kill();
-
         if (_fluidSim)
         {
             _fluidSim.OnObstacleRegistered -= OnObstacleChangedHandler;
             _fluidSim.OnObstacleUnregistered -= OnObstacleChangedHandler;
         }
+        
+        _ctaLoopSequence.Kill();
+        _ctaShineLoopSequence.Kill();
+        _titleShowSequence.Kill();
+        _ctaShowTween.Kill();
     }
 
     private void Start()
@@ -116,43 +107,41 @@ public class TitleScreen : MonoBehaviour
 
     private void StartCtaLoop()
     {
-        _ctaLoopSequence?.Kill();
+        _ctaLoopSequence.Kill();
         _ctaTextTransform01.anchoredPosition = new Vector2(_ctaTextTransform01.anchoredPosition.x, _ctaTextDefaultY);
         _ctaTextTransform02.anchoredPosition = new Vector2(_ctaTextTransform02.anchoredPosition.x, _ctaTextDefaultY);
 
         _ctaLoopSequence = CtaSequence();
         _ctaLoopSequence.SetLoops(-1, LoopType.Restart).Play();
 
-        _ctaShineLoopSequence?.Kill();
+        _ctaShineLoopSequence.Kill();
         _ctaShineLoopSequence = CtaShineSequence();
         _ctaShineLoopSequence.SetLoops(-1, LoopType.Restart).Play();
     }
 
     private void StopCtaLoop()
     {
-        _ctaLoopSequence?.Kill();
-        _ctaLoopSequence = null;
+        _ctaLoopSequence.Kill();
 
-        _ctaShineLoopSequence?.Kill();
-        _ctaShineLoopSequence = null;
+        _ctaShineLoopSequence.Kill();
     }
 
     private void ShowTitle()
     {
-        _titleShowSequence?.Kill();
+        _titleShowSequence.Kill();
         _titleShowSequence = ShowTitleSequence();
 
-        _ctaShowTween?.Kill();
+        _ctaShowTween.Kill();
         _ctaShowTween = _ctaTextCanvasGroup.DOFade(1f, _titleShowHideDuration).SetEase(Ease.OutCubic);
         StartCtaLoop();
     }
 
     private void HideTitle()
     {
-        _titleShowSequence?.Kill();
+        _titleShowSequence.Kill();
         _titleShowSequence = HideTitleSequence();
 
-        _ctaShowTween?.Kill();
+        _ctaShowTween.Kill();
         _ctaShowTween = _ctaTextCanvasGroup.DOFade(0f, _titleShowHideDuration).SetEase(Ease.InCubic);
 
         StopCtaLoop();

@@ -1,5 +1,4 @@
-using System;
-using DG.Tweening;
+using PrimeTween;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,13 +29,13 @@ public class GradeStar : MonoBehaviour
 
     private void OnDestroy()
     {
-        _currentRevealSequence?.Kill();
-        _currentSetupSequence?.Kill();
+        _currentRevealSequence.Kill();
+        _currentSetupSequence.Kill();
     }
 
     public Sequence StarSetupSequence()
     {
-        _currentSetupSequence?.Kill();
+        _currentSetupSequence.Kill();
         return _currentSetupSequence = DOTween.Sequence()
             .Append(_starOutlineImage.DOFade(1f, _starRevealDuration).SetEase(Ease.OutQuint));
     }
@@ -46,7 +45,7 @@ public class GradeStar : MonoBehaviour
        
         _starTransform.localScale = Vector3.one * _starRevealStartScale;
 
-        _currentRevealSequence?.Kill();
+        _currentRevealSequence.Kill();
         return _currentRevealSequence = DOTween.Sequence()
             .AppendCallback(delegate
             {
