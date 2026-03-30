@@ -477,12 +477,16 @@ namespace Seb.Fluid2D.Simulation
 
             if (Input.GetKeyDown(KeyCode.M))
             {
-                colorMixingActivated = !colorMixingActivated;
-                maxPlayerColors = colorMixingActivated ? 3 : 6;
-                UpdateObstacleAndPlayerState(true);
-                
-                OnColorMixingModeChanged?.Invoke(colorMixingActivated);
+                ToggleColorMixing();
             }
+        }
+
+        public void ToggleColorMixing()
+        {
+            colorMixingActivated = !colorMixingActivated;
+            maxPlayerColors = colorMixingActivated ? 3 : 6;
+            UpdateObstacleAndPlayerState(true);
+            OnColorMixingModeChanged?.Invoke(colorMixingActivated);
         }
 
         void ProcessParticleRemovals()
