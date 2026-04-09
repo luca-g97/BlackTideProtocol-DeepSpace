@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.15, g: 0.15, b: 0.15, a: 0.7490196}
+  m_Color: {r: 0.05, g: 0.05, b: 0.05, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.8390495, b: 0.25943398, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -480,6 +480,8 @@ MonoBehaviour:
   - {fileID: 8494551718881126660}
   - {fileID: 6058779459769986635}
   _factText: {fileID: 8435181620535948295}
+  _uiAudioSource: {fileID: 0}
+  _factRevealClip: {fileID: 8300000, guid: e7061c1463dff3d47a6d1a39ead1ffcd, type: 3}
 --- !u!1 &3746196462531813880
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,8 +801,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 80, y: 0}
-  m_SizeDelta: {x: -260, y: -70}
+  m_AnchoredPosition: {x: 75, y: 0}
+  m_SizeDelta: {x: -220, y: -70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1367648541458530353
 CanvasRenderer:
@@ -834,8 +836,8 @@ MonoBehaviour:
     William Sound. Over 250,000 seabirds, 2,800 sea otters, and hundreds of seals
     died in the aftermath.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bd54064dea200414aa08aa6f83228608, type: 2}
-  m_sharedMaterial: {fileID: -8956955358165571313, guid: bd54064dea200414aa08aa6f83228608, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e12c1eb25a5d22f4383aba271232939d, type: 2}
+  m_sharedMaterial: {fileID: 806808198131655276, guid: e12c1eb25a5d22f4383aba271232939d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -859,17 +861,18 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 17.1
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 24
+  m_fontSizeMin: 16
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -988,7 +991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.795, g: 0.795, b: 0.795, a: 0.7490196}
+  m_Color: {r: 1, g: 0.93544304, b: 0.7, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1143,6 +1146,13 @@ MonoBehaviour:
   - {fileID: 1307133098614899683}
   _shineTransform: {fileID: 126035635914095445}
   _shineImage: {fileID: 7564755753395273262}
+  _starRevealSounds:
+  - {fileID: 8300000, guid: a70b386e46ad2f04baf86146212c747a, type: 3}
+  - {fileID: 8300000, guid: a70b386e46ad2f04baf86146212c747a, type: 3}
+  - {fileID: 8300000, guid: a70b386e46ad2f04baf86146212c747a, type: 3}
+  - {fileID: 8300000, guid: a70b386e46ad2f04baf86146212c747a, type: 3}
+  - {fileID: 8300000, guid: a70b386e46ad2f04baf86146212c747a, type: 3}
+  _starRevealPitchStep: 0.2
 --- !u!114 &8908492431548146601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1329,8 +1339,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 19.2
-  m_fontSizeBase: 19.2
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 24
@@ -1340,6 +1350,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1431,7 +1442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.15, g: 0.15, b: 0.15, a: 0.7490196}
+  m_Color: {r: 0.05, g: 0.05, b: 0.05, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1522,8 +1533,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280427042
-  m_fontColor: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 1}
+    rgba: 4280690214
+  m_fontColor: {r: 0.15, g: 0.15, b: 0.15, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1551,6 +1562,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1688,6 +1700,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2001,6 +2014,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2237273152266333409, guid: 529b8cf67151cd24bb43a5df0dee796f, type: 3}
+      propertyPath: _revealSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 589b8e7c9f5c1904694c9718f87025fe, type: 3}
     - target: {fileID: 7240235463728041233, guid: 529b8cf67151cd24bb43a5df0dee796f, type: 3}
       propertyPath: m_Name
       value: StatLine_01
@@ -2340,6 +2357,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2237273152266333409, guid: 529b8cf67151cd24bb43a5df0dee796f, type: 3}
+      propertyPath: _revealSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 71473d6f0438ed44eb4598adc92a2344, type: 3}
     - target: {fileID: 6310258154349050019, guid: 529b8cf67151cd24bb43a5df0dee796f, type: 3}
       propertyPath: m_text
       value: Yellow
@@ -2574,6 +2595,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2237273152266333409, guid: 529b8cf67151cd24bb43a5df0dee796f, type: 3}
+      propertyPath: _revealSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 589b8e7c9f5c1904694c9718f87025fe, type: 3}
     - target: {fileID: 7240235463728041233, guid: 529b8cf67151cd24bb43a5df0dee796f, type: 3}
       propertyPath: m_Name
       value: StatLine_02
@@ -2687,6 +2712,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2237273152266333409, guid: 529b8cf67151cd24bb43a5df0dee796f, type: 3}
+      propertyPath: _revealSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 589b8e7c9f5c1904694c9718f87025fe, type: 3}
     - target: {fileID: 7240235463728041233, guid: 529b8cf67151cd24bb43a5df0dee796f, type: 3}
       propertyPath: m_Name
       value: StatLine
@@ -2800,6 +2829,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2237273152266333409, guid: 529b8cf67151cd24bb43a5df0dee796f, type: 3}
+      propertyPath: _revealSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 71473d6f0438ed44eb4598adc92a2344, type: 3}
     - target: {fileID: 7240235463728041233, guid: 529b8cf67151cd24bb43a5df0dee796f, type: 3}
       propertyPath: m_Name
       value: StatLine_03
