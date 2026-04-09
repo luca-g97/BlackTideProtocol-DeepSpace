@@ -85,7 +85,10 @@ namespace Seb.Fluid2D.Simulation
 
         bool isPaused;
         Spawner2D_Wall.ParticleSpawnData initialSpawnData;
-        bool pauseNextFrame;
+        [HideInInspector]
+        public bool pauseNextFrame;
+        [HideInInspector]
+        public bool unPauseNextFrame;
         public int numParticles { get; private set; }
         private bool isProcessingRemovals = false;
 
@@ -382,6 +385,7 @@ namespace Seb.Fluid2D.Simulation
             }
 
             if (pauseNextFrame) { isPaused = true; pauseNextFrame = false; }
+            if (unPauseNextFrame) { isPaused = false; unPauseNextFrame = false; }
             //HandleInput();
         }
 

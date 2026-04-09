@@ -54,8 +54,6 @@ public class MonitorMixingChange : MonoBehaviour
             fluidSim = FindFirstObjectByType<FluidSim2D>();
         }
 
-        Debug.Log(player.gameObject.name);
-
         if (player.gameObject.name.Contains("Ghost") && player.transform.parent.parent.GetComponent<FluidObstacle>() &&
             player.transform.parent.parent.GetComponent<PlayerDirectionTracker>() && activatingPlayer == null)
         {

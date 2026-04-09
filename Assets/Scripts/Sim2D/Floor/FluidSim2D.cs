@@ -60,6 +60,7 @@ namespace Seb.Fluid2D.Simulation
         public ComputeShader compute;
         public Spawner2D spawner2D;
         private FluidSim2D_Wall fluidSim_Wall;
+        public List<GameObject> playerList = new List<GameObject>();
 
         public ComputeBuffer positionBuffer { get; private set; }
         ComputeBuffer predictedPositionBuffer;
@@ -108,7 +109,10 @@ namespace Seb.Fluid2D.Simulation
 
         bool isPaused;
         Spawner2D.ParticleSpawnData initialSpawnData;
-        bool pauseNextFrame;
+        [HideInInspector]
+        public bool pauseNextFrame;
+        [HideInInspector]
+        public bool unPauseNextFrame;
         public int numParticles { get; private set; }
         private bool isProcessingRemovals = false;
 
@@ -167,6 +171,7 @@ namespace Seb.Fluid2D.Simulation
         [Range(0, 6)] public int maxPlayerColors = 3;
         public Color colorSymbolizingNoPlayer = Color.white;
         public int lastPlayerCount = -1;
+        public int internalLastPlayerCount = -1;
         public bool colorMixingActivated = false;
 
         [Header("Obstacle Visualization")]
@@ -474,6 +479,9 @@ namespace Seb.Fluid2D.Simulation
             }
 
             if (pauseNextFrame) { isPaused = true; pauseNextFrame = false; }
+            if (unPauseNextFrame) { isPaused = false; unPauseNextFrame = false; }
+
+            internalLastPlayerCount = !isPaused ? lastPlayerCount : 0;
 
             if (Input.GetKeyDown(KeyCode.M))
             {
@@ -858,6 +866,8 @@ namespace Seb.Fluid2D.Simulation
             List<GameObject> sortedPlayersForColoring = obstacles
                 .Where(o => _obstacleCache.ContainsKey(o) && o.CompareTag("Player"))
                 .ToList();
+
+            playerList = sortedPlayersForColoring;
 
             if (listActuallyChanged || sortedPlayersForColoring.Count != lastPlayerCount)
             {

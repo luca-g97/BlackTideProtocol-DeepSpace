@@ -65,7 +65,7 @@ public class MissionTracker : MonoBehaviour
 
     private void Update()
     {
-        if (fluidSimulation.lastPlayerCount > 0)
+        if (fluidSimulation.internalLastPlayerCount > 0)
         {
             missionRuntimeLeft -= Time.deltaTime;
 

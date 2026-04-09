@@ -78,7 +78,7 @@ public class TitleScreen : MonoBehaviour
 
     private void Start()
     {
-        if (_fluidSim.lastPlayerCount > 0)
+        if (_fluidSim.internalLastPlayerCount > 0)
         {
             HideTitle();
             _isTitleVisible = false;

@@ -47,6 +47,11 @@ public class TouchPlayer : MonoBehaviour
                 case TouchPhase.Stationary:
                     if (trackedObjects.TryGetValue(inputId, out GameObject trackedObject))
                     {
+                        if (MonitorPause.Instance != null && MonitorPause.Instance.IsPlayerLocked(trackedObject))
+                        {
+                            break;
+                        }
+                        
                         trackedObject.transform.position = currentWorldInputPosition;
                     }
                     break;

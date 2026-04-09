@@ -108,7 +108,7 @@ namespace Seb.Fluid2D.Simulation
             _volumetricSphereMeshRenderer.SetPropertyBlock(_volumetricSphereBlock);
 
             // Check if the condition to spawn is met
-            bool shouldBeSpawning = _fluidSim.lastPlayerCount > 0;
+            bool shouldBeSpawning = _fluidSim.internalLastPlayerCount > 0;
 
             // If we should be spawning but we aren't, start the process
             if (shouldBeSpawning && allowSpawning)

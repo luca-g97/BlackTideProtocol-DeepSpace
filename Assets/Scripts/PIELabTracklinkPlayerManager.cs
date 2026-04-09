@@ -226,7 +226,12 @@ namespace Assets.Tracking_Example.Scripts
                     */
                     newPlayerPos.x = -(sceneWidth / 2.0f) + (sceneWidth * trackRecord.relPos.x);
                     newPlayerPos.y = -(sceneHeight / 2.0f) + (sceneHeight * (1.0f - trackRecord.relPos.y));
-
+                    
+                    if (MonitorPause.Instance != null && MonitorPause.Instance.IsPlayerLocked(aPlayer.gameObject))
+                    {
+                        return;
+                    }
+                    
                     aPlayer.SetPosition(newPlayerPos);
 
                     return;
