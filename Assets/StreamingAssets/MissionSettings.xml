@@ -2,7 +2,7 @@
 <MissionSettingsData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <totalMissionRuntime>240</totalMissionRuntime>
   <missionOvertime>10</missionOvertime>
-  <missionRestartDelayAfterGrade>45</missionRestartDelayAfterGrade>
+  <missionRestartDelayAfterGrade>40</missionRestartDelayAfterGrade>
   <coralPenalty>10</coralPenalty>
   <sealPenalty>50</sealPenalty>
   <mixedOilCountPerPointRecovered>100</mixedOilCountPerPointRecovered>

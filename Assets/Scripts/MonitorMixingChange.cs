@@ -21,6 +21,10 @@ public class MonitorMixingChange : MonoBehaviour
     [SerializeField] private Animator _secondaryFlareCrateAnimator;
     [SerializeField] private VisualEffect[] _primaryFlareEffects;
     [SerializeField] private VisualEffect[] _secondaryFlareEffects;
+    [SerializeField] private AudioSource _primaryFlareAudioSource;
+    [SerializeField] private AudioSource _secondaryFlareAudioSource;
+    [SerializeField] private AudioSource _successAudioSource;
+    [SerializeField] private AudioClip _successAudioClip;
     
     [SerializeField] private float _successImageAnimationDuration = 0.5f;
     [SerializeField] private float _successImageAnimationScale = 5f;
@@ -105,48 +109,54 @@ public class MonitorMixingChange : MonoBehaviour
         StopPrimaryFlares();
         StopSecondaryFlares();
         AnimateSuccessImage();
+        
+        _successAudioSource.PlayOneShot(_successAudioClip);
     }
 
     private void StartPrimaryFlares()
     {
         foreach (VisualEffect flare in _primaryFlareEffects)
         {
-            flare.Play();
+            if (flare) flare.Play();
         }
 
         _primaryFlareCrateAnimator.ResetTrigger(FlaresDown);
         _primaryFlareCrateAnimator.SetTrigger(FlaresUp);
+        _primaryFlareAudioSource.Play();
     }
 
     private void StartSecondaryFlares()
     {
         foreach (VisualEffect flare in _secondaryFlareEffects)
         {
-            flare.Play();
+            if (flare) flare.Play();
         }
 
         _secondaryFlareCrateAnimator.ResetTrigger(FlaresDown);
         _secondaryFlareCrateAnimator.SetTrigger(FlaresUp);
+        _secondaryFlareAudioSource.Play();
     }
 
     private void StopPrimaryFlares()
     {
         foreach (VisualEffect flare in _primaryFlareEffects)
         {
-            flare.Stop();
+            if (flare) flare.Stop();
         }
 
         _primaryFlareCrateAnimator.SetTrigger(FlaresDown);
+        _primaryFlareAudioSource.Stop();
     }
 
     private void StopSecondaryFlares()
     {
         foreach (VisualEffect flare in _secondaryFlareEffects)
         {
-            flare.Stop();
+            if (flare) flare.Stop();
         }
 
         _secondaryFlareCrateAnimator.SetTrigger(FlaresDown);
+        _secondaryFlareAudioSource.Stop();
     }
 
     private void UpdateTimerTexts(string text)
