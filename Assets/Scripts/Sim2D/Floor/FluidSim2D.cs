@@ -183,6 +183,10 @@ namespace Seb.Fluid2D.Simulation
         private float autoUpdateInterval = 0.5f;
         private float nextAutoUpdateTime;
         private bool _forceObstacleBufferUpdate = false;
+        
+        private static bool s_hasSavedSessionState = false;
+        private static bool s_colorMixingActivated = false;
+        private static int s_maxPlayerColors = 6;
 
         private struct PendingRemovalRequest
         {
@@ -195,6 +199,12 @@ namespace Seb.Fluid2D.Simulation
 
         void Start()
         {
+            if (s_hasSavedSessionState)
+            {
+                colorMixingActivated = s_colorMixingActivated;
+                maxPlayerColors = s_maxPlayerColors;
+            }
+            
             //Debug.Log("Controls: Space = Play/Pause, R = Reset, LMB = Attract, RMB = Repel, G + Mouse = Gravity Well");
             GameObject.FindFirstObjectByType<XMLSettings>().GetComponent<XMLSettings>().XMLReload(0);
             InitSimulation();
@@ -493,6 +503,11 @@ namespace Seb.Fluid2D.Simulation
         {
             colorMixingActivated = !colorMixingActivated;
             maxPlayerColors = colorMixingActivated ? 3 : 6;
+            
+            s_colorMixingActivated = colorMixingActivated;
+            s_maxPlayerColors = maxPlayerColors;
+            s_hasSavedSessionState = true;
+            
             UpdateObstacleAndPlayerState(true);
             OnColorMixingModeChanged?.Invoke(colorMixingActivated);
         }

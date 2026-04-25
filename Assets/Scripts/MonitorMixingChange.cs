@@ -34,14 +34,25 @@ public class MonitorMixingChange : MonoBehaviour
     private Collider2D activatingPlayer;
     private Coroutine colorMixingCR;
     private FluidSim2D fluidSim;
-
+    private MissionTracker _missionTracker;
+    private BoxCollider2D colorMixingCollider;
+    
     private Sequence _successImageSequence;
 
     private static readonly int FlaresUp = Animator.StringToHash("FlaresUp");
     private static readonly int FlaresDown = Animator.StringToHash("FlaresDown");
+    
+    // Temp
+    [SerializeField] private GameObject colorMixingCanvas;
+    [SerializeField] private GameObject colorMixingCrate1;
+    [SerializeField] private GameObject colorMixingCrate2;
+    
 
     private void Start()
     {
+        colorMixingCollider = GetComponent<BoxCollider2D>();
+        _missionTracker = FindFirstObjectByType<MissionTracker>();
+        _missionTracker.OnMissionOver += OnMissionOverHandler;
         UpdateTimerTexts(string.Empty);
         fillImage.fillAmount = 0f;
         successImage.transform.localScale = Vector3.zero;
@@ -176,5 +187,15 @@ public class MonitorMixingChange : MonoBehaviour
             .Chain(Tween.Scale(successImage.transform, Vector3.one * _successImageAnimationScale, _successImageAnimationDuration).SetEase(Ease.OutCubic))
             .Group(Tween.Alpha(successImage, 0f, _successImageAnimationDuration).SetEase(Ease.Linear))
             .Group(Tween.Rotation(successImage.transform, Quaternion.Euler(0, 0, 180), _successImageAnimationDuration).SetEase(Ease.Linear));
+    }
+
+    private void OnMissionOverHandler()
+    {
+        colorMixingCollider.enabled = true;
+        
+        // Temp-Enable
+        colorMixingCrate1.SetActive(true);
+        colorMixingCrate2.SetActive(true);
+        colorMixingCanvas.SetActive(true);
     }
 }
