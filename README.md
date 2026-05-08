@@ -4,8 +4,7 @@
 
 > A defective oil platform spews a deadly, colorful tide into the ocean, threatening to wipe out an entire seal colony. Pilot skimmer ships with your body, track down absorbable oil particles, and team up to split complex oil mixtures before removing them. Can you stop the black tide before it's too late?
 
-<video src="BTP-Documentation.mp4" autoplay loop muted playsinline width="100%"></video>
-<video src="https://raw.githubusercontent.com/luca-g97/BlackTideProtocol-DeepSpace/main/BTP-Documentation.mp4" autoplay loop muted playsinline width="100%"></video>
+https://github.com/luca-g97/BlackTideProtocol-DeepSpace/raw/refs/heads/main/BTP-Documentation.mp4
 
 **Creators:** Luca Geiger (DE), Dino Ponjevic (AT), Alexander Hödlmoser (AT)  
 **Context:** Developed in the Interactive Media course *Game Spaces* at [FH Hagenberg](https://www.fh-ooe.at/campus-hagenberg/).  
