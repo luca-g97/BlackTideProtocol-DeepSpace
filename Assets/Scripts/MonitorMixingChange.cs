@@ -28,31 +28,47 @@ public class MonitorMixingChange : MonoBehaviour
     
     [SerializeField] private float _successImageAnimationDuration = 0.5f;
     [SerializeField] private float _successImageAnimationScale = 5f;
+    [SerializeField] private float _crateAnimationDuration = 0.5f;
+    [SerializeField] private float _crateAnimationDelay = 0.25f;
+        
+    private float _internalColorMixingTimer;
 
-    private float internalColorMixingTimer;
-
-    private Collider2D activatingPlayer;
-    private Coroutine colorMixingCR;
-    private FluidSim2D fluidSim;
+    private Collider2D _activatingPlayer;
+    private Coroutine _colorMixingCR;
+    private FluidSim2D _fluidSim;
     private MissionTracker _missionTracker;
-    private BoxCollider2D colorMixingCollider;
+    private BoxCollider2D _colorMixingCollider;
     
     private Sequence _successImageSequence;
+    private Sequence _currentCrateSequence;
 
     private static readonly int FlaresUp = Animator.StringToHash("FlaresUp");
     private static readonly int FlaresDown = Animator.StringToHash("FlaresDown");
     
     // Temp
-    [SerializeField] private GameObject colorMixingCanvas;
-    [SerializeField] private GameObject colorMixingCrate1;
-    [SerializeField] private GameObject colorMixingCrate2;
+    [SerializeField] private GameObject _colorMixingCanvas;
+    [SerializeField] private GameObject _colorMixingCrate1;
+    [SerializeField] private GameObject _colorMixingCrate2;
+
+    private void Awake()
+    {
+        _colorMixingCollider = GetComponent<BoxCollider2D>();
+        _missionTracker = FindFirstObjectByType<MissionTracker>();
+    }
+
+    private void OnEnable()
+    {
+        _missionTracker.OnMissionOver += OnMissionOverHandler;
+    }
     
+    private void OnDisable()
+    {
+        _missionTracker.OnMissionOver -= OnMissionOverHandler;
+    }
 
     private void Start()
     {
-        colorMixingCollider = GetComponent<BoxCollider2D>();
-        _missionTracker = FindFirstObjectByType<MissionTracker>();
-        _missionTracker.OnMissionOver += OnMissionOverHandler;
+        SetColorMixing(false);
         UpdateTimerTexts(string.Empty);
         fillImage.fillAmount = 0f;
         successImage.transform.localScale = Vector3.zero;
@@ -60,20 +76,20 @@ public class MonitorMixingChange : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D player)
     {
-        if (!fluidSim)
+        if (!_fluidSim)
         {
-            fluidSim = FindFirstObjectByType<FluidSim2D>();
+            _fluidSim = FindFirstObjectByType<FluidSim2D>();
         }
 
         if (player.gameObject.name.Contains("Ghost") && player.transform.parent.parent.GetComponent<FluidObstacle>() &&
-            player.transform.parent.parent.GetComponent<PlayerDirectionTracker>() && activatingPlayer == null)
+            player.transform.parent.parent.GetComponent<PlayerDirectionTracker>() && _activatingPlayer == null)
         {
-            activatingPlayer = player;
-            colorMixingCR = StartCoroutine(ColorMixingCR());
+            _activatingPlayer = player;
+            _colorMixingCR = StartCoroutine(ColorMixingCR());
 
             StartPrimaryFlares();
 
-            if (fluidSim.colorMixingActivated)
+            if (_fluidSim.colorMixingActivated)
             {
                 StartSecondaryFlares();
             }
@@ -82,13 +98,13 @@ public class MonitorMixingChange : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D player)
     {
-        if (player == activatingPlayer)
+        if (player == _activatingPlayer)
         {
-            activatingPlayer = null;
-            if (colorMixingCR != null)
+            _activatingPlayer = null;
+            if (_colorMixingCR != null)
             {
-                StopCoroutine(colorMixingCR);
-                colorMixingCR = null;
+                StopCoroutine(_colorMixingCR);
+                _colorMixingCR = null;
                 UpdateTimerTexts(string.Empty);
                 fillImage.fillAmount = 0;
 
@@ -100,18 +116,18 @@ public class MonitorMixingChange : MonoBehaviour
 
     private IEnumerator ColorMixingCR()
     {
-        internalColorMixingTimer = colorMixingTimer;
-        while (internalColorMixingTimer >= 0.0f)
+        _internalColorMixingTimer = colorMixingTimer;
+        while (_internalColorMixingTimer >= 0.0f)
         {
             yield return new WaitForSecondsRealtime(0.1f);
-            internalColorMixingTimer -= 0.1f;
-            UpdateTimerTexts(internalColorMixingTimer.ToString("0"));
-            fillImage.fillAmount = 1 - internalColorMixingTimer / colorMixingTimer;
+            _internalColorMixingTimer -= 0.1f;
+            UpdateTimerTexts(_internalColorMixingTimer.ToString("0"));
+            fillImage.fillAmount = 1 - _internalColorMixingTimer / colorMixingTimer;
         }
 
-        fluidSim.ToggleColorMixing();
-        successImage.sprite = fluidSim.colorMixingActivated ? threeColorImage : sixColorImage;
-        previewImage.sprite = fluidSim.colorMixingActivated ? sixColorImage : threeColorImage;
+        _fluidSim.ToggleColorMixing();
+        successImage.sprite = _fluidSim.colorMixingActivated ? threeColorImage : sixColorImage;
+        previewImage.sprite = _fluidSim.colorMixingActivated ? sixColorImage : threeColorImage;
         UpdateTimerTexts(string.Empty);
         fillImage.fillAmount = 0;
 
@@ -191,11 +207,34 @@ public class MonitorMixingChange : MonoBehaviour
 
     private void OnMissionOverHandler()
     {
-        colorMixingCollider.enabled = true;
+        AnimateCrates();
+        SetColorMixing(true);
+    }
+    
+    private void SetColorMixing(bool enable)
+    {
+        _colorMixingCollider.enabled = enable;
         
-        // Temp-Enable
-        colorMixingCrate1.SetActive(true);
-        colorMixingCrate2.SetActive(true);
-        colorMixingCanvas.SetActive(true);
+        _colorMixingCrate1.SetActive(enable);
+        _colorMixingCrate2.SetActive(enable);
+        _colorMixingCanvas.SetActive(enable);
+    }
+
+    private void AnimateCrates()
+    {
+        Transform primaryCrateTransform = _colorMixingCrate1.transform;
+        Transform secondaryCrateTransform = _colorMixingCrate2.transform;
+        Transform canvasTransform = _colorMixingCanvas.transform;
+        
+        primaryCrateTransform.localScale = Vector3.zero;
+        secondaryCrateTransform.localScale = Vector3.zero;
+        canvasTransform.localScale = Vector3.zero;
+        
+        _currentCrateSequence.Stop();
+        
+        _currentCrateSequence = Sequence.Create()
+            .Chain(Tween.Scale(primaryCrateTransform, Vector3.one, 0.5f).SetEase(Ease.OutBack))
+            .Insert(_crateAnimationDelay, Tween.Scale(secondaryCrateTransform, Vector3.one, 0.5f).SetEase(Ease.OutBack))
+            .Insert(_crateAnimationDelay * 2, Tween.Scale(canvasTransform, Vector3.one, 0.5f).SetEase(Ease.OutBack));
     }
 }
