@@ -20,7 +20,7 @@ public class XMLSettings : MonoBehaviour
         catch { }
 
 
-        string configFileName = "SIM_Config.xml";
+        string configFileName = "SimulationSettings.xml";
         string path = Path.Combine(Application.streamingAssetsPath, configFileName);
 
         if (!File.Exists(path))

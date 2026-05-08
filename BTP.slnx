@@ -1,7 +1,7 @@
-﻿<Solution>
-  <Project Path="Assembly-CSharp.csproj" />
-  <Project Path="Assembly-CSharp-Editor.csproj" />
-  <Project Path="Assembly-CSharp-Editor-firstpass.csproj" />
-  <Project Path="Assembly-CSharp-firstpass.csproj" />
-  <Project Path="sc.utilities.screenshot.editor.csproj" />
+<Solution>
+  <Project Path="Assembly-CSharp.csproj" Id="c6a5af49-21dc-b61c-6037-2f24279c400d" />
+  <Project Path="Assembly-CSharp-Editor.csproj" Id="9431af67-e986-fcd6-9541-6f434b76adef" />
+  <Project Path="Assembly-CSharp-Editor-firstpass.csproj" Id="30eddae0-8738-9499-1070-4cf2c8a98804" />
+  <Project Path="Assembly-CSharp-firstpass.csproj" Id="8a36d549-d861-0282-ebb1-e64a032d5f37" />
+  <Project Path="sc.utilities.screenshot.editor.csproj" Id="f41041cc-edb4-8cb5-1936-290e9b2a5d5d" />
 </Solution>

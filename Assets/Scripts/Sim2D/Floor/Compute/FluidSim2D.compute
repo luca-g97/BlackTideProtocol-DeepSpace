@@ -381,7 +381,7 @@ void HandleCollisions(uint particleIndex)
                     ParticleTypeBuffer[particleIndex][1] = obstacleIdx;
                     // Add a break here to stop checking against other players for removal flagging.
                     // The highlighting logic above will have already accumulated all nearby players for the color blend.
-                    break;
+                    // break;
                 }
             }
             // --- Ventil Obstacle Interaction (type 2) ---
@@ -740,53 +740,65 @@ void CompactAndMoveParticles(uint3 id : SV_DispatchThreadID)
         {
             float3 particleVisualColor = mixableColors[particleColorIndex].rgb;
 
-            // --- Step 2: Get the UNIQUE BASE colors of all nearby players ---
-            int4 nearbyObstacleIndices = Source_Collision[id.x];
-            float3 uniqueColors[4];
-            int uniqueColorCount = 0;
-
-            for (int i = 0; i < 4; i++)
+            if (colorMixingActivated == 0) 
             {
-                int obsIndex = nearbyObstacleIndices[i];
-                if (obsIndex >= 0)
-                {
-                    float3 obsColor = ObstacleColorsBuffer[obsIndex].rgb;
-                    bool alreadyFound = false;
-                    
-                    if (uniqueColorCount > 0)
-                    {
-                        for (int j = 0; j < uniqueColorCount; j++)
-                        {
-                            if (distance(obsColor, uniqueColors[j]) < 0.001)
-                            {
-                                alreadyFound = true;
-                                break;
-                            }
-                        }
-                    }
-                    
-                    if (!alreadyFound && uniqueColorCount < 4)
-                    {
-                        uniqueColors[uniqueColorCount] = obsColor;
-                        uniqueColorCount++;
-                    }
-                }
-            }
+                // NO MIXING: Ignore the collision array. Just check the exact boat that touched it.
+                float3 collectorColor = ObstacleColorsBuffer[removalFlag].rgb;
 
-            // --- Step 3: AVERAGE the unique base colors to get the resulting blend ---
-            if (uniqueColorCount > 0)
-            {
-                float3 blendedColorSum = float3(0, 0, 0);
-                for (int i = 0; i < uniqueColorCount; i++)
-                {
-                    blendedColorSum += uniqueColors[i];
-                }
-                float3 blendedColorAverage = blendedColorSum / uniqueColorCount;
-
-                // --- Step 4: Compare the blend of base colors to the particle's current visual color ---
-                if (distance(blendedColorAverage, particleVisualColor) < 0.02)
+                if (distance(collectorColor, particleVisualColor) < 0.02)
                 {
                     shouldKeep = false;
+                }
+            }
+            else
+            {
+                // --- Step 2: Get the UNIQUE BASE colors of all nearby players ---
+                int4 nearbyObstacleIndices = Source_Collision[id.x];
+                float3 uniqueColors[4];
+                int uniqueColorCount = 0;
+
+                for (int i = 0; i < 4; i++)
+                {
+                    int obsIndex = nearbyObstacleIndices[i];
+                    if (obsIndex >= 0)
+                    {
+                        float3 obsColor = ObstacleColorsBuffer[obsIndex].rgb;
+                        bool alreadyFound = false;
+                        
+                        if (uniqueColorCount > 0)
+                        {
+                            for (int j = 0; j < uniqueColorCount; j++)
+                            {
+                                if (distance(obsColor, uniqueColors[j]) < 0.001)
+                                {
+                                    alreadyFound = true;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        if (!alreadyFound && uniqueColorCount < 4)
+                        {
+                            uniqueColors[uniqueColorCount] = obsColor;
+                            uniqueColorCount++;
+                        }
+                    }
+                }
+
+                // --- Step 3: AVERAGE the unique base colors to get the resulting blend ---
+                if (uniqueColorCount > 0)
+                {
+                    float3 blendedColorSum = float3(0, 0, 0);
+                    for (int i = 0; i < uniqueColorCount; i++)
+                    {
+                        blendedColorSum += uniqueColors[i];
+                    }
+                    float3 blendedColorAverage = blendedColorSum / uniqueColorCount;
+
+                    if (distance(blendedColorAverage, particleVisualColor) < 0.02)
+                    {
+                        shouldKeep = false;
+                    }
                 }
             }
         }

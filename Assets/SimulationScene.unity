@@ -671,13 +671,29 @@ PrefabInstance:
       propertyPath: _dropShieldSound
       value: 
       objectReference: {fileID: 8300000, guid: 664720607d203844c93985b08154bf19, type: 3}
+    - target: {fileID: 5115309382981769726, guid: 12a459f569d937245aba276524e554bc, type: 3}
+      propertyPath: m_ForceMeshLod
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6187115754193077356, guid: 12a459f569d937245aba276524e554bc, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6226322438319938963, guid: 12a459f569d937245aba276524e554bc, type: 3}
+      propertyPath: m_ForceMeshLod
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7641371186833884585, guid: 12a459f569d937245aba276524e554bc, type: 3}
+      propertyPath: m_ForceMeshLod
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8558435236559466325, guid: 12a459f569d937245aba276524e554bc, type: 3}
       propertyPath: m_Name
       value: Coral_Ventil
+      objectReference: {fileID: 0}
+    - target: {fileID: 8651734223543273508, guid: 12a459f569d937245aba276524e554bc, type: 3}
+      propertyPath: m_ForceMeshLod
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -852,7 +868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.15, g: 0.15, b: 0.15, a: 0.7490196}
+  m_Color: {r: 0.15, g: 0.15, b: 0.15, a: 0.6509804}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8050,6 +8066,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1245391284}
     m_Modifications:
+    - target: {fileID: -5839609769661888532, guid: d5a8b5e34ab8b5541a9375714bf669d7, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -5839609769661888532, guid: d5a8b5e34ab8b5541a9375714bf669d7, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 61b0674b06cf88b428e20ea744657d29, type: 2}
+    - target: {fileID: 2875124610455295451, guid: d5a8b5e34ab8b5541a9375714bf669d7, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2875124610455295451, guid: d5a8b5e34ab8b5541a9375714bf669d7, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b40b139cfaa212f468511e6e871bfe9b, type: 2}
+    - target: {fileID: 7357618082908253556, guid: d5a8b5e34ab8b5541a9375714bf669d7, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7357618082908253556, guid: d5a8b5e34ab8b5541a9375714bf669d7, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8768219bbfd012a4bb852a243b278912, type: 2}
     - target: {fileID: 237689406611559769, guid: 7c59bf26d7973f248a7e52d42d5bf9ec, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -8170,30 +8210,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
-    - target: {fileID: -5839609769661888532, guid: d5a8b5e34ab8b5541a9375714bf669d7, type: 3}
-      propertyPath: m_RenderingLayerMask
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: -5839609769661888532, guid: d5a8b5e34ab8b5541a9375714bf669d7, type: 3}
-      propertyPath: 'm_Materials.Array.data[1]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 61b0674b06cf88b428e20ea744657d29, type: 2}
-    - target: {fileID: 2875124610455295451, guid: d5a8b5e34ab8b5541a9375714bf669d7, type: 3}
-      propertyPath: m_RenderingLayerMask
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2875124610455295451, guid: d5a8b5e34ab8b5541a9375714bf669d7, type: 3}
-      propertyPath: 'm_Materials.Array.data[1]'
-      value: 
-      objectReference: {fileID: 2100000, guid: b40b139cfaa212f468511e6e871bfe9b, type: 2}
-    - target: {fileID: 7357618082908253556, guid: d5a8b5e34ab8b5541a9375714bf669d7, type: 3}
-      propertyPath: m_RenderingLayerMask
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7357618082908253556, guid: d5a8b5e34ab8b5541a9375714bf669d7, type: 3}
-      propertyPath: 'm_Materials.Array.data[1]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 8768219bbfd012a4bb852a243b278912, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8819,7 +8835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.15, g: 0.15, b: 0.15, a: 0.7490196}
+  m_Color: {r: 0.15, g: 0.15, b: 0.15, a: 0.6509804}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9765,6 +9781,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1781308777}
     m_Modifications:
+    - target: {fileID: 1109053262809597162, guid: b9c3c4623c7137e4a924d6540c19c814, type: 3}
+      propertyPath: m_ForceMeshLod
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3231429651831957818, guid: b9c3c4623c7137e4a924d6540c19c814, type: 3}
       propertyPath: _impactSound
       value: 
@@ -9824,6 +9844,14 @@ PrefabInstance:
     - target: {fileID: 6943474321355613504, guid: b9c3c4623c7137e4a924d6540c19c814, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722513793728670140, guid: b9c3c4623c7137e4a924d6540c19c814, type: 3}
+      propertyPath: m_ForceMeshLod
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8794244114781735309, guid: b9c3c4623c7137e4a924d6540c19c814, type: 3}
+      propertyPath: m_ForceMeshLod
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9897,6 +9925,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5885226267421574620, guid: 207243c18f3405d4d85f875d21fd523d, type: 3}
+      propertyPath: m_ForceMeshLod
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6018931795337727032, guid: 207243c18f3405d4d85f875d21fd523d, type: 3}
+      propertyPath: m_ForceMeshLod
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7384576516755153650, guid: 207243c18f3405d4d85f875d21fd523d, type: 3}
       propertyPath: _impactSound
       value: 
@@ -9909,6 +9945,10 @@ PrefabInstance:
       propertyPath: _dropShieldSound
       value: 
       objectReference: {fileID: 8300000, guid: 664720607d203844c93985b08154bf19, type: 3}
+    - target: {fileID: 8241957433551531403, guid: 207243c18f3405d4d85f875d21fd523d, type: 3}
+      propertyPath: m_ForceMeshLod
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9933,6 +9973,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1781308777}
     m_Modifications:
+    - target: {fileID: 27817707003289361, guid: 37088714cf529d94e88e0c1c897cb9aa, type: 3}
+      propertyPath: m_ForceMeshLod
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2244897612544414331, guid: 37088714cf529d94e88e0c1c897cb9aa, type: 3}
+      propertyPath: m_ForceMeshLod
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2730515343276783192, guid: 37088714cf529d94e88e0c1c897cb9aa, type: 3}
       propertyPath: _impactSound
       value: 
@@ -9948,6 +9996,10 @@ PrefabInstance:
     - target: {fileID: 2843503405003555935, guid: 37088714cf529d94e88e0c1c897cb9aa, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5128793379322348492, guid: 37088714cf529d94e88e0c1c897cb9aa, type: 3}
+      propertyPath: m_ForceMeshLod
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6699897058769946083, guid: 37088714cf529d94e88e0c1c897cb9aa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9996,6 +10048,10 @@ PrefabInstance:
     - target: {fileID: 9144779916333721820, guid: 37088714cf529d94e88e0c1c897cb9aa, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209515434450613351, guid: 37088714cf529d94e88e0c1c897cb9aa, type: 3}
+      propertyPath: m_ForceMeshLod
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
