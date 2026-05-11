@@ -1410,6 +1410,8 @@ MonoBehaviour:
   oilViscosityStrength: 0.4
   compute: {fileID: 7200000, guid: 2d342f91ee800f140958be6ec301e94a, type: 3}
   spawner2D: {fileID: 271053327}
+  pauseNextFrame: 0
+  unPauseNextFrame: 0
   obstacles: []
 --- !u!114 &271053327
 MonoBehaviour:
@@ -4938,11 +4940,11 @@ RectTransform:
   - {fileID: 2064656203}
   m_Father: {fileID: 2028145367}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1280, y: -180}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -570, y: 229.99997}
   m_SizeDelta: {x: 500, y: 260}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &686829938
 GameObject:
   m_ObjectHideFlags: 0
@@ -22877,7 +22879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2884798051786768421, guid: 828c237b39dc44c469b40f45b4acc7b8, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 54.77
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2884798051786768421, guid: 828c237b39dc44c469b40f45b4acc7b8, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -23033,7 +23035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4981133786314487345, guid: 828c237b39dc44c469b40f45b4acc7b8, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 54.77
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4981133786314487345, guid: 828c237b39dc44c469b40f45b4acc7b8, type: 3}
       propertyPath: m_AnchoredPosition.x
